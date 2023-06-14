@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 06.06.2023
 /// </summary>
 /// <created>ʆϒʅ, 06.06.2023</created>
-/// <changed>ʆϒʅ, 06.06.2023</changed>
+/// <changed>ʆϒʅ, 08.06.2023</changed>
 // --------------------------------------------------------------------------------
 
 
@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: () => import('../views/ContactView.vue')
+    },
+    {
+      path: '/component',
+      name: 'component',
+      component: () => import('../views/ComponentView.vue')
     }
   ]
 })

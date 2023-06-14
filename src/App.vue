@@ -7,7 +7,7 @@
 /// created by Mehrdad Soleimanimajd on 06.06.2023
 /// </summary>
 /// <created>ʆϒʅ, 06.06.2023</created>
-/// <changed>ʆϒʅ, 06.06.2023</changed>
+/// <changed>ʆϒʅ, 08.06.2023</changed>
 // --------------------------------------------------------------------------------
 
 
@@ -26,6 +26,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/contact">Contact</RouterLink>
+        <RouterLink to="/component">Component</RouterLink>
       </nav>
     </div>
   </header>
