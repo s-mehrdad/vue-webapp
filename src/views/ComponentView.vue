@@ -20,7 +20,7 @@ let debug = false;
 let dev = true;
 
 const aVariable = ref('')
-aVariable.value = 'oneVariable'
+aVariable.value = 'one Variable'
 const aComputedVariable = computed(
     () => {
         return aVariable.value.split('')
@@ -30,9 +30,9 @@ const aComputedVariable = computed(
 let indexTopic = 0;
 const hideDeals = ref('false')
 const aArray = ref([
-    { topic: indexTopic++, sentence: 'firstSentence', dealt: false },
-    { topic: indexTopic++, sentence: 'secondSentence', dealt: true },
-    { topic: indexTopic++, sentence: 'thirdSentence', dealt: false }
+    { topic: indexTopic++, sentence: 'first Sentence', dealt: false },
+    { topic: indexTopic++, sentence: 'second Sentence', dealt: true },
+    { topic: indexTopic++, sentence: 'third Sentence', dealt: false }
 ])
 function unneededFunc() {
     // let i = 0;
@@ -101,17 +101,27 @@ onMounted(() => {
     <p :class="applyClass">{{ aVariable }}</p>
     <p>{{ aArray[0].sentence }}</p>
     <p>{{ arrayItem }}</p>
-    <button class="w-fit border border-spacing-2 p-3" @click="unneededFunc()">unneededTheseToo</button>
+    <button class="w-fit border border-spacing-1 border-green-500 p-2" @click="unneededFunc()">unneededTheseToo</button>
     <p class="text-4xl font-light my-5" :style="applyStyle">{{ aComputedVariable }}</p>
     <br />
     <ul>
-        <li v-for="(item, index) in filteredDeals" :key="item.topic"
-        >
-            {{ item.topic }}: {{ item.sentence }} --- {{ item.dealt ? 'dealt' : 'notYet' }}
-            <input type="checkbox" v-model="item.dealt">
-            <button v-on:click.shift="item.dealt = !item.dealt">{{ item.dealt ? '#free' : '#dealt!' }}</button>
-            <input v-model="item.sentence" placeholder="editThen" />
-            <!-- <input :value="item.sentence" @input="toBeChanged" placeholder="editThen" /> -->
+        <li v-for="(item, index) in filteredDeals" :key="item.topic">
+            <table>
+                <!-- tab -->
+                <tr>
+                    <td class="w-3/5">
+                        {{ item.topic }}: {{ item.sentence }} --- {{ item.dealt ? 'dealt' : 'notYet' }}
+                        <input type="checkbox" v-model="item.dealt">
+                        <button class="w-fit border" v-on:click.shift="item.dealt = !item.dealt">
+                            {{ item.dealt ? '#free' : '#dealt!' }}
+                        </button>&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input class="w-fit border border-zinc-900" v-model="item.sentence" placeholder="editThen" />
+                        <!-- <input :value="item.sentence" @input="toBeChanged" placeholder="editThen" /> -->
+                    </td>
+                </tr>
+            </table>
         </li>
         <form name="showHide">
             <label name="showHide">&nbsp;&nbsp;&nbsp;hide deals:</label>
@@ -132,12 +142,11 @@ onMounted(() => {
 </template>
 
 <style>
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .apply {
     color: rgba(0, 208, 255, 0.59);
 }
-
 </style>
