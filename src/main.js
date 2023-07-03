@@ -1,5 +1,4 @@
-
-// --------------------------------------------------------------------------------
+// ===========================================================================
 /// <summary>
 /// main.js
 /// vue-webapp
@@ -7,17 +6,16 @@
 /// </summary>
 /// <created>ʆϒʅ, 06.06.2023</created>
 /// <changed>ʆϒʅ, 06.06.2023</changed>
-// --------------------------------------------------------------------------------
+// ===========================================================================
 
+import "./assets/main.css";
 
-import './assets/main.css'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+const app = createApp(App);
 
-const app = createApp(App)
+app.use(router);
 
-app.use(router)
-
-app.mount('#app')
+app.mount("#app");

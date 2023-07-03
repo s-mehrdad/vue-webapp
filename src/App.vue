@@ -1,23 +1,27 @@
+<!-- =========================================================================
+/// <summary>
+/// App.vue
+/// vue-webapp
+/// created by Mehrdad Soleimanimajd on 06.06.2023
+/// </summary>
+/// <created>ʆϒʅ, 06.06.2023</created>
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+========================================================================== -->
 
 <script setup>
-  // --------------------------------------------------------------------------------
-  /// <summary>
-  /// App.vue
-  /// vue-webapp
-  /// created by Mehrdad Soleimanimajd on 06.06.2023
-  /// </summary>
-  /// <created>ʆϒʅ, 06.06.2023</created>
-  /// <changed>ʆϒʅ, 17.06.2023</changed>
-  // --------------------------------------------------------------------------------
-
-
-  import { RouterLink, RouterView } from 'vue-router'
-  import HelloWorld from './components/HelloWorld.vue'
+  import { RouterLink, RouterView } from "vue-router";
+  import HelloWorld from "./components/HelloWorld.vue";
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+    />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />

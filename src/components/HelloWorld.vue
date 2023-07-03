@@ -1,16 +1,14 @@
+<!-- =========================================================================
+/// <summary>
+/// HelloWorld.vue
+/// vue-webapp
+/// created by Mehrdad Soleimanimajd on 06.06.2023
+/// </summary>
+/// <created>ʆϒʅ, 06.06.2023</created>
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+========================================================================== -->
 
 <script setup>
-  // --------------------------------------------------------------------------------
-  /// <summary>
-  /// HelloWorld.vue
-  /// vue-webapp
-  /// created by Mehrdad Soleimanimajd on 06.06.2023
-  /// </summary>
-  /// <created>ʆϒʅ, 06.06.2023</created>
-  /// <changed>ʆϒʅ, 06.06.2023</changed>
-  // --------------------------------------------------------------------------------
-
-
   // import { ref } from 'vue'
 
   // properties
@@ -18,24 +16,27 @@
     // const props = defineProps({
     msg: {
       type: String,
-      required: true
+      required: true,
     },
     canSee: {
       type: String,
       required: false,
       default() {
         // return "visibility: " +"hidden";
-        return 'visible';
-      }
-    }
-  })
-
+        return "visible";
+      },
+    },
+  });
 </script>
 
 <template>
   <div class="greetings">
     <h2 class="green">{{ msg }}</h2>
-    <h4 id="greet-msg" :style="{ visibility: canSee }" style="color: rgb(13, 157, 235);">
+    <h4
+      id="greet-msg"
+      :style="{ visibility: canSee }"
+      style="color: rgb(13, 157, 235)"
+    >
       You’ve successfully created a project with
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
@@ -60,7 +61,6 @@
   }
 
   @media (min-width: 1024px) {
-
     .greetings h1,
     .greetings h3 {
       text-align: left;

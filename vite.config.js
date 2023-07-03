@@ -1,14 +1,24 @@
-import { fileURLToPath, URL } from 'node:url'
+// ===========================================================================
+/// <summary>
+/// vite.config.js
+/// project
+/// created by Mehrdad Soleimanimajd on 06.06.2023
+/// </summary>
+/// <created>ʆϒʅ, 06.06.2023</created>
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { fileURLToPath, URL } from "node:url";
+
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
-})
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+});
