@@ -65,6 +65,4 @@ Contributions in any forms are welcome.
 </table>
 
 # Copyright Notice
-While literature and all known and unknown ideas provide within following project
-are copyrighted, as all open-source projects, source code itself may be used under
-terms provided and included in project under LICENSE unit.
+Refer to license file provide within SOFTWARE itself.
