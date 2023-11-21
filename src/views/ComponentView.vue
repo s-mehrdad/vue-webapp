@@ -5,7 +5,7 @@
 /// created by Mehrdad Soleimanimajd on 08.06.2023
 /// </summary>
 /// <created>ʆϒʅ, 08.06.2023</created>
-/// <changed>ʆϒʅ, 06.11.2023</changed>
+/// <changed>ʆϒʅ, 21.11.2023</changed>
 ========================================================================== -->
 
 <script setup>
@@ -20,10 +20,12 @@
     let debug = false;
     let dev = true;
 
+    // props
     const props = defineProps({
         castString: [Boolean, String],
     });
 
+    // reactive variables
     const aVariable = ref("");
     aVariable.value = "one Variable";
     const aComputedVariable = computed(() => {
@@ -31,6 +33,13 @@
         //TODO: create an effect on each character
     });
 
+    // reactive array
+    const firstArray = ref([
+        { topic: 1, category: "audio", content: "-_-_-_-" },
+    ]);
+    const arrayItem = ref(firstArray.value[0].content);
+
+    // reactivity
     let indexTopic = 0;
     const hideDeals = ref("false");
     const aArray = ref([
@@ -66,7 +75,6 @@
             dealt: false,
         });
     }
-
     function dealThen(obj) {
         aArray.value = aArray.value.filter((t) => {
             t == obj ? (t.dealt = !t.dealt) : t.dealt;
@@ -74,25 +82,23 @@
             if (t == obj) alert(t.sentence + obj.sentence);
         });
     }
-
     const objChange = ref("");
     function toBeChanged(e) {
         item.sentence = e.target.value;
     }
-
     const filteredDeals = computed(() => {
         return hideDeals.value == "true"
             ? aArray.value.filter((t) => !t.dealt)
             : aArray.value;
     });
 
-    const arrayItem = ref(aArray.value[0].sentence);
-
+    // referenced attributes
     const applyClass = ref("apply");
     const applyStyle = ref("color: red;");
 
     const buttonClass = ref("buttonC");
 
+    // reference
     const pTagReference = ref(null);
     const toShowFlag = ref(true);
     const toShow = computed(() => {
@@ -127,65 +133,78 @@
 
 <template>
     <div class="component">
-        <p :class="applyClass">{{ aVariable }}</p>
-        <p>{{ aArray[0].sentence }}</p>
-        <p>{{ arrayItem }}</p>
-        <button
-            class="w-fit border-4 border-spacing-0 border-green-500 p-1"
-            @click="unneededFunc('down')"
-        >
-            One Step Backward</button
-        ><br />
-        <button
-            class="w-fit border border-spacing-1 border-green-500 p-2"
-            @click="unneededFunc('up')"
-        >
-            One Topic Forward
-        </button>
-        <input
-            typw="text"
-            class="border border-rose-500"
-            v-model="newSentence"
-            placeholder="type here then"
-        />
-        <button
-            class="w-fit border border-spacing-1 border-green-500 p-2"
-            @click="addNewItem()"
-        >
-            One New Sentence
-        </button>
-        <p class="text-3xl font-light my-5" :style="applyStyle">
-            {{ aComputedVariable }}
-        </p>
-        <br />
-        <ul>
-            <p class="border-2 border-yellow-300">sEnTeNcEd: sentenced ...</p>
-            <li v-for="(item, index) in filteredDeals" :key="item.topic">
-                <table>
-                    <!-- tab -->
-                    <tr>
-                        <td class="w-3/5">
-                            {{ item.topic }}: {{ item.sentence }} ---
-                            {{ item.dealt ? "dealt" : "notYet" }}
-                            <input type="checkbox" v-model="item.dealt" />
-                            <button
-                                class="w-fit border"
-                                v-on:click.shift="item.dealt = !item.dealt"
-                            >
-                                {{ item.dealt ? "#free" : "#dealt!" }}</button
-                            >&nbsp;&nbsp;
-                        </td>
-                        <td>
-                            <input
-                                class="w-fit border border-zinc-900"
-                                v-model="item.sentence"
-                                placeholder="editThen"
-                            />
-                            <!-- <input :value="item.sentence" @input="toBeChanged" placeholder="editThen" /> -->
-                        </td>
-                    </tr>
-                </table>
-            </li>
+        <!-- reactive variables and arrays -->
+        <div>
+            <p :class="applyClass">{{ aVariable }}</p>
+            <p>{{ aArray[0].sentence }}</p>
+            <p class="text-3xl font-light my-5" :style="applyStyle">
+                {{ aComputedVariable }}
+            </p>
+            <p>{{ arrayItem }}</p>
+            <br />
+        </div>
+
+        <!-- reactivity -->
+        <div>
+            <button
+                class="w-fit border-4 border-spacing-0 border-green-500 p-1"
+                @click="unneededFunc('down')"
+            >
+                One Step Backward</button
+            ><br />
+            <button
+                class="w-fit border border-spacing-1 border-green-500 p-2"
+                @click="unneededFunc('up')"
+            >
+                One Topic Forward
+            </button>
+            <input
+                typw="text"
+                class="border border-rose-500"
+                v-model="newSentence"
+                placeholder="type here then"
+            />
+            <button
+                class="w-fit border border-spacing-1 border-green-500 p-2"
+                @click="addNewItem()"
+            >
+                One New Sentence
+            </button>
+            <br />
+
+            <ul>
+                <p class="border-2 border-yellow-300">
+                    sEnTeNcEd: sentenced ...
+                </p>
+                <li v-for="(item, index) in filteredDeals" :key="item.topic">
+                    <table>
+                        <!-- tab -->
+                        <tr>
+                            <td class="w-3/5">
+                                {{ item.topic }}: {{ item.sentence }} ---
+                                {{ item.dealt ? "dealt" : "notYet" }}
+                                <input type="checkbox" v-model="item.dealt" />
+                                <button
+                                    class="w-fit border"
+                                    v-on:click.shift="item.dealt = !item.dealt"
+                                >
+                                    {{
+                                        item.dealt ? "#free" : "#dealt!"
+                                    }}</button
+                                >&nbsp;&nbsp;
+                            </td>
+                            <td>
+                                <input
+                                    class="w-fit border border-zinc-900"
+                                    v-model="item.sentence"
+                                    placeholder="editThen"
+                                />
+                                <!-- <input :value="item.sentence" @input="toBeChanged" placeholder="editThen" /> -->
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
             <form name="showHide">
                 <label name="showHide"
                     >&nbsp;&nbsp;&nbsp;&nbsp;--hide deals:</label
@@ -210,24 +229,33 @@
                     checked
                 />
                 <label for="show">&nbsp;show</label>
-                <p v-if="debug" :class="applyClass">{{ item }}</p>
-                <p v-else-if="dev" :class="applyClass">development</p>
-                <p v-else :class="applyClass" ref="reference">awesome</p>
-                <p ref="pTagReference">awesome-d</p>
-                <p>&nbsp;&nbsp;&nbsp;{{ toShow }}&nbsp;&nbsp;&nbsp;</p>
-                <p>{{ toShowFlag }}</p>
-                <input type="checkbox" v-model="toShowFlag" />
             </form>
-        </ul>
+            <br />
+        </div>
 
-        <!-- 
+        <!-- conditionals and template refs -->
+        <form name="templateRefs">
+            <p v-if="debug" :class="applyClass">{{ item }}</p>
+            <p v-else-if="dev" :class="applyClass">development</p>
+            <p v-else :class="applyClass" ref="reference">awesome</p>
+
+            <p ref="pTagReference">initial content</p>
+            <p>awesome-d</p>
+
+            <p>&nbsp;&nbsp;&nbsp;{{ toShow }}&nbsp;&nbsp;&nbsp;</p>
+            <p>{{ toShowFlag }}</p>
+            <input type="checkbox" v-model="toShowFlag" name="templateRefs" />
+        </form>
+        <br />
+
+        <!--
           documentation:
 
-          castVar ->  special props, at presence can trigger special features
-
-          response and increment ->  normal emits events
-
-          call-cast and call-increment ->  defined on built-in $emit method
+          * castVar -> special props, at presence can trigger special features
+          
+          * response and increment -> normal emits events
+          * call-cast and call-increment -> defined on built-in $emit method
+          * differentCast -> normal emit in function
           -->
         <ChildComponent
             castVar
@@ -243,7 +271,9 @@
             "
             @call-cast="calledOnCast"
             @call-increment="responseIncrement++"
-            ><!-- String -->
+            @differentCast="calledOnCast"
+        >
+            <!-- passed component's template fragments through <slot> element -->
             Content
         </ChildComponent>
 

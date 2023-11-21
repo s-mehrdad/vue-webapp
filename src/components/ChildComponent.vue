@@ -5,24 +5,29 @@
 /// created by Mehrdad Soleimanimajd on 17.06.2023
 /// </summary>
 /// <created>ʆϒʅ, 17.06.2023</created>
-/// <changed>ʆϒʅ, 06.11.2023</changed>
+/// <changed>ʆϒʅ, 21.11.2023</changed>
 ========================================================================== -->
 
 <script setup>
     import { ref, computed } from "vue";
+    import { watch } from "vue";
 
+    // export default {
+    // emits: ['callCast']
+    // }
+    // defineEmits(["callCast"]);
     const props = defineProps({
         castVar: [Number, Boolean, String],
     });
 
-    // const wEnabled = ref(castVar.value)
+    // const attEnabled = ref(castVar.value)
 
     const stated = ref([
         { tested: false, test: "one" },
         { tested: true, test: "two" },
     ]);
     // class container to vue reference
-    class wContainer {
+    class featureContainer {
         constructor(stateObj) {
             stated.value[0].tested = stateObj;
         }
@@ -30,7 +35,7 @@
             console.log(stated.value[0]);
         }
     }
-    class wEnabled extends wContainer {
+    class featureEnabled extends featureContainer {
         constructor(obj, stateObj) {
             super(stateObj);
             this.seemsTrue = obj;
@@ -43,40 +48,57 @@
             return param == "test" ? "testFlight" : "testFlight2";
         }
     }
-    let aa = new wEnabled(props.castVar, 111 + " flight tested");
+    let aa = new featureEnabled(props.castVar, 111 + " flight tested");
 
-    const aEmit = defineEmits(["response", "increment"]);
-    aEmit("response", "hi");
-    aEmit("increment", 1);
+    // watch reactive property changes
+    const testWatch = ref("a ref");
+    watch(testWatch, async (newOne, oldOne) => {
+        console.log("old value: " + oldOne + "  -  new value: " + newOne);
+    });
+    testWatch.value = "ref new value";
 
-    function onTestFlight() {
+    const allEmits = defineEmits([
+        "response",
+        "increment",
+        "callCast",
+        "callIncrement",
+        "differentCast",
+    ]);
+    allEmits("response", "hi");
+    allEmits("increment", 1);
+
+    function featureTest() {
         console.log(props.castVar);
+        allEmits("differentCast", Boolean("true"), "different");
     }
 </script>
 
 <template>
     <div class="child">
+        <!-- defined boolean attribute -->
         <h2 class="bg-blend-color-dodge">
             {{ castVar }}: then {{ aa.wEnabled() }} features of this tag and
             {{ aa.wEnabledT("testD") }} features of again this tag
         </h2>
+
+        <!-- emitted events -->
         <button
             class="border border-red-500"
-            @click.exact="$emit('callCast', Boolean('true'), 3)"
+            @click.exact="$emit('callCast', Boolean('true'), 'clicked')"
             @mouseenter="$emit('callIncrement')"
-            @click.alt="onTestFlight"
+            @click.alt="featureTest"
         >
             call cast
         </button>
     </div>
-    <!-- <div slot="test">aaa</div> -->
+
+    <!-- component fragments receive element -->
     <slot>Fallback</slot>
+    <!-- <div slot="test">aaa</div> -->
 </template>
 
 <style scoped>
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
-
-
 </style>
